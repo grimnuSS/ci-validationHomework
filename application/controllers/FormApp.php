@@ -1,17 +1,22 @@
-<?php 
-class FormApp extends CI_CONTROLLER{
-    public function __construct(){
+<?php
+
+class FormApp extends CI_Controller
+{
+    public function __construct()
+    {
         parent::__construct();
     }
 
-    public function index(){
+    public function index()
+    {
         $this->load->view("formApp_view");
     }
 
-    public function save(){
+    public function save()
+    {
         /* Form Validation */
         $this->load->library("form_validation");
-        
+
         /* Form Validation Kuralları */
         $this->form_validation->set_rules("ad", "İsim", "required|trim");
         $this->form_validation->set_rules("soyad", "Soyisim", "required|trim");
@@ -28,7 +33,7 @@ class FormApp extends CI_CONTROLLER{
 
         /* Form Validation Çalıştırma */
         $validate = $this->form_validation->run();
-        if($validate){
+        if ($validate) {
             $data = array(
                 "name" => $this->input->post("ad"),
                 "surname" => $this->input->post("soyad"),
@@ -37,19 +42,19 @@ class FormApp extends CI_CONTROLLER{
             );
             $this->load->model("FormApp_Model");
             $this->FormApp_Model->save($data);
-            
-            echo "Validasyon Başarılı";
 
-            
-        }else{
+            // Tüm kayıtları çekmek için
+            $liste = $this->FormApp_Model->getAll();
+
+            // View'e verileri taşıyarak yükleme
+            $this->load->view("formAppList_view", array('liste' => $liste));
+        } else {
             echo "Validasyon Başarısız";
-
             $viewData = new stdClass();
             $viewData->form_error = true;
             $this->load->view("formApp_view", $viewData);
-
         }
     }
-
 }
+
 ?>

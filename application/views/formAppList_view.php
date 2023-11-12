@@ -62,7 +62,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<h1>Kayıt Listesi</h1>
 
 	<div id="body">
-        
+        <?php if (!empty($liste)): ?>
+        <ul>
+            <?php foreach ($liste as $item): ?>
+                <li><?php echo $item['name'] . ' ' . $item['surname']; ?></li>
+            <?php endforeach; ?>
+        </ul>
+        <?php else: ?>
+            <p>Hiç kayıt bulunamadı.</p>
+        <?php endif; ?>
 	</div>
 </div>
 

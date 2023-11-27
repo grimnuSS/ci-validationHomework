@@ -65,7 +65,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <?php if (!empty($liste)): ?>
         <ul>
             <?php foreach ($liste as $item): ?>
-                <li><?php echo $item['name'] . ' ' . $item['surname']; ?></li>
+                <li><?php echo  $item['id'] . ' ' . $item['name'] . ' ' . $item['surname'] . ' ' . $item['email'] . ' ' . $item['password']; ?></li>
             <?php endforeach; ?>
         </ul>
         <?php else: ?>
